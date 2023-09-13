@@ -18,8 +18,8 @@ SPECTROGRAMS_PASSAGES_PATH = "/Users/isaac/Documents/DATASETS/SAMPLE_ENHANCEMENT
 SPECTROGRAMS_RECREATIONS_PATH = "/Users/isaac/Documents/DATASETS/SAMPLE_ENHANCEMENT/SPECTROGRAMS_RECREATIONS"
 
 # Load spectrograms
-x_clean = load.load_data_set(SPECTROGRAMS_PASSAGES_PATH)
-x_noisy = load.load_data_set(SPECTROGRAMS_RECREATIONS_PATH)
+x_clean = load.load_data_set(SPECTROGRAMS_PASSAGES_PATH)[:200]
+x_noisy = load.load_data_set(SPECTROGRAMS_RECREATIONS_PATH)[:200]
 
 # Convert to 32 bit floating point
 x_clean = x_clean.astype('float32')
@@ -183,7 +183,8 @@ for e in range(1, EPOCHS+1):
                                                       FRAME_SIZE,
                                                       SR,
                                                       num_files=1,
-                                                      file_prefix="passage_test_audio")
+                                                      file_prefix="passage_test_audio",
+                                                      output_dir="INPUT_AUDIO_TESTS")
         audiogeneration.convert_spectrograms_to_audio(e,
                                                        x_noisy_batch,
                                                        overall_max,
@@ -192,7 +193,8 @@ for e in range(1, EPOCHS+1):
                                                        FRAME_SIZE,
                                                        SR,
                                                        num_files=1,
-                                                       file_prefix="samples_test_audio")
+                                                       file_prefix="samples_test_audio",
+                                                       output_dir="INPUT_AUDIO_TESTS")
 
     dLosses.append(d_loss)
     gLosses.append(g_loss)
